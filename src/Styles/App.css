@@ -1,0 +1,66 @@
+.App {
+	text-align: center;
+	width: 100vw;
+	height: 100vh;
+	overflow: hidden;
+}
+
+.cardListContainerApp{
+	height: 122vh;
+	margin-top: 2em;
+	display: grid;
+	justify-content: start;
+	align-items: center;
+	margin-left: 0.75em;
+	
+	
+}
+
+h1 {
+	font-family: "Merienda";
+	font-size: 4em;
+	color: white;
+}
+
+input {
+	background-color: rgba(153, 255, 230, 0.1);
+	border-radius: 0%;
+	font-size: 2em;
+	border-radius: 50%;
+	height: 167px;
+	width: 400px;
+	text-align: center;
+	outline: none;
+	border: none;
+}
+
+input:focus {
+	outline: none;
+}
+
+input::placeholder {
+	text-align: center;
+}
+
+.loader {
+	width: 120px;
+	height: 120px;
+	border: 16px solid #f3f3f3;
+	border-top: 16px solid #3498db;
+	border-radius: 50%;
+	animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+	0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+
+.loaderContainer{
+	display: grid;
+	justify-items: center;
+	align-items: center;
+}
+
+

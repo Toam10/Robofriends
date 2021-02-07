@@ -1,0 +1,73 @@
+.warper {
+	width: 100%;
+	height: 100%;
+	display: grid;
+	justify-content: center;
+	align-content: center;
+	position: relative;
+}
+
+.outer {
+	width: 95vw;
+	height: 60vh;
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	justify-items: center;
+	gap: 1em;
+	position: absolute;
+	
+}
+
+.roboImage {
+	background-size: cover;
+	background-position: center center;
+	display: grid;
+	justify-items: center;
+	height: 10em;
+	border-radius: 50%;
+}
+
+.subContent {
+	font-size: 1.2em;
+}
+
+.mainContent {
+	display: grid;
+	justify-content: center;
+	background-color: rgba(82, 181, 194, 0.6);
+	border: 2px solid rgba(19, 73, 82, 0.6);
+	border-radius: 10px;
+	width: 85%;
+	height: 20.3em;
+	text-align: center;
+	transition: ease-in-out 0.5s;
+}
+.header-2 {
+	color: rgba(7, 49, 54, 0.8);
+}
+
+.paragraph-1 {
+	color: rgba(7, 49, 54, 0.7);
+	font-size: 1.1em;
+}
+
+.outer :hover {
+	transform: scale(1.07);
+}
+
+@media only screen and (max-width: 1200px) {
+	.outer {
+		grid-template-columns: repeat(3, 1fr);
+	}
+}
+@media only screen and (max-width: 1000px) {
+	.outer {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+@media only screen and (max-width: 700px) {
+	.outer {
+		grid-template-columns: repeat(1, 1fr);
+	}
+}
