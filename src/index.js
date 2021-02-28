@@ -1,13 +1,31 @@
-import React from "react";
-import ReactDOM from "react-dom";
 import "./index.css";
-import App from "./containers/App";
 import reportWebVitals from "./reportWebVitals";
+import React from "react";
+// =========================
+import ReactDOM from "react-dom";
+import { Provider } from "react-redux";
+import { createStore, applyMiddleware, combineReducers } from "redux";
+import thunkMiddelware from "redux-thunk";
+import { createLogger } from "redux-logger";
+// =========================
+import { 
+	searchRobotsReducer, 
+	requestRobotsReducer } from "./reducers";
+
+import App from "./containers/App";
+
+const logger = createLogger();
+const rootReducer = combineReducers({
+	searchRobotsReducer,
+	requestRobotsReducer,
+});
+const store = createStore(rootReducer, 
+	applyMiddleware(thunkMiddelware, logger));
 
 ReactDOM.render(
-	<React.StrictMode>
+	<Provider store={store}>
 		<App />
-	</React.StrictMode>,
+	</Provider>,
 	document.getElementById("root")
 );
 

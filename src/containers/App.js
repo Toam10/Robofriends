@@ -3,33 +3,38 @@ import CardList from "../Components/CardList";
 import SearchBox from "../Components/SearchBox";
 import Scroller from "../Components/Scroller";
 import "../Styles/App.css";
+import { connect } from "react-redux";
+import { setSearchField, requestRobots } from "../actions";
+
+const mapStateToProps = (state) => {
+	return {
+		searchField: state.searchRobotsReducer.searchField,
+
+		isPending: state.requestRobotsReducer.isPending,
+		robots: state.requestRobotsReducer.robots,
+		error: state.requestRobotsReducer.error,
+	};
+};
+
+const mapDispatchToProps = (dispatch) => {
+	return {
+		onSearchChange: (event) => dispatch(setSearchField(event.target.value)),
+		onRequestRobots: () => dispatch(requestRobots()),
+	};
+};
 
 class App extends Component {
-	constructor() {
-		super();
-		this.state = {
-			robotsProfiles: [],
-			searchField: "",
-		};
-	}
-
 	componentDidMount() {
-		fetch("https://jsonplaceholder.typicode.com/users")
-			.then((respones) => respones.json())
-			.then((robotsProfiles) => this.setState({ robotsProfiles }));
+		this.props.onRequestRobots();
 	}
-
-	onSearchChange = (event) => {
-		this.setState({ searchField: event.target.value });
-	};
 
 	render() {
-		const { robotsProfiles, searchField } = this.state;
-		const filteredRobots = robotsProfiles.filter((profile) => {
+		const { searchField, onSearchChange, robots } = this.props;
+		const filteredRobots = robots.filter((profile) => {
 			const { name } = profile;
 			return name.toLowerCase().includes(searchField.toLowerCase());
 		});
-		if (!robotsProfiles.length) {
+		if (!robots.length) {
 			return (
 				<div className='loaderContainer'>
 					<h1>Loding</h1>
@@ -47,9 +52,9 @@ class App extends Component {
 					>
 						RoboFriends
 					</h1>
-					<SearchBox searchChange={this.onSearchChange} />
+					<SearchBox searchChange={onSearchChange} />
 					<Scroller>
-						<div className="cardListContainerApp" >
+						<div className='cardListContainerApp'>
 							<CardList robotsProfiles={filteredRobots} />
 						</div>
 					</Scroller>
@@ -59,4 +64,4 @@ class App extends Component {
 	}
 }
 
-export default App;
+export default connect(mapStateToProps, mapDispatchToProps)(App);
